@@ -40,6 +40,7 @@ export function Button({
   return (
     <FlowbiteButton
       className={twMerge(
+        "rounded-sm",
         variantClasses[variant],
         sizeClasses[size],
         "focus:ring-2",

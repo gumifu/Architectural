@@ -2,6 +2,9 @@ import { createTheme } from "flowbite-react";
 import type { FlowbiteTheme, ThemingProps } from "flowbite-react/types";
 
 export const customTheme = createTheme({
+  button: {
+    base: "relative flex items-center justify-center rounded-sm text-center font-medium focus:ring-4 focus:outline-none",
+  },
   modal: {
     content: {
       inner: "dark:bg-gray-800",
