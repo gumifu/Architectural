@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/contexts/locale-context";
 import { useSidebarContext } from "@/contexts/sidebar-context";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import {
@@ -36,6 +37,7 @@ import {
 } from "react-icons/hi";
 
 export function DashboardNavbar() {
+  const { locale } = useLocale();
   const sidebar = useSidebarContext();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
@@ -73,7 +75,7 @@ export function DashboardNavbar() {
                 <HiMenuAlt1 className="h-6 w-6" />
               </div>
             </button>
-            <NavbarBrand as={Link} href="/" className="mr-14">
+            <NavbarBrand as={Link} href={`/${locale}`} className="mr-14">
               <Image
                 className="mr-3 h-8"
                 alt=""

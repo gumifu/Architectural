@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "findArchitecture": "Find architecture",
+    "findFromMap": "Find from map",
+    "survey": "Survey",
+    "nearbyArchitecture": "Architecture nearby",
+    "everyonesExploration": "Everyone's architecture exploration"
+  },
+  "footer": {
+    "copyright": "© Architectual. All rights reserved."
+  },
+  "home": {
+    "title": "Architecture, closer to you",
+    "subtitle": "Discover nearby architecture and share with everyone"
+  },
+  "sections": {
+    "find": {
+      "title": "Find architecture",
+      "description": "Search for buildings by keyword or criteria. Find the ones that interest you.",
+      "cta": "Search"
+    },
+    "map": {
+      "title": "Find from map",
+      "description": "Pick an area on the map and discover architecture nearby. Plan your walking route.",
+      "cta": "Open map"
+    },
+    "survey": {
+      "title": "Survey",
+      "description": "Answer a short survey and get personalized architecture recommendations.",
+      "cta": "Take survey"
+    },
+    "nearby": {
+      "title": "Architecture nearby",
+      "description": "See a list of buildings near your current location. Explore on the go.",
+      "cta": "Show nearby"
+    },
+    "exploration": {
+      "title": "Everyone's architecture exploration",
+      "description": "Browse visits and posts from other users. You might find something new.",
+      "cta": "View explorations"
+    }
+  }
+}

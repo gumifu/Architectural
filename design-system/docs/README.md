@@ -28,7 +28,9 @@ design-system/
 import { Button } from "@/design-system";
 import { colors, spacing } from "@/design-system/tokens";
 
-<Button variant="primary" size="md">送信</Button>
+<Button variant="primary" size="md">
+  送信
+</Button>;
 ```
 
 既存の `app/theme.ts` は Flowbite 用のテーマ拡張のまま利用し、デザインシステムのトークンは新規コンポーネントやスタイルの参照用として利用できます。

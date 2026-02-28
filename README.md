@@ -105,5 +105,7 @@ bun run build
 ## How to deploy
 
 Next.js projects are designed to be deployed most easily to [Vercel](https://vercel.com/docs/deployments/overview), but they can be deployed to other platforms, including your own Node.js server. Refer to [Vercel's docs on deploying Next.js](https://nextjs.org/docs/pages/building-your-application/deploying) for more information.
+
 # Architectural
+
 # Architectural

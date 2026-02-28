@@ -32,7 +32,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         />
         <ThemeModeScript />
       </head>
-      <body className={twMerge("bg-gray-50 dark:bg-gray-900", inter.className)}>
+      <body
+        className={twMerge("bg-gray-50 dark:bg-gray-900", inter.className)}
+        suppressHydrationWarning
+      >
         <ThemeProvider theme={customTheme} applyTheme={applyTheme}>
           {children}
         </ThemeProvider>

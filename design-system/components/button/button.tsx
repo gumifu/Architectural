@@ -25,7 +25,10 @@ const sizeClasses = {
 export type ButtonVariant = keyof typeof variantClasses;
 export type ButtonSize = keyof typeof sizeClasses;
 
-export interface ButtonProps extends Omit<ComponentProps<typeof FlowbiteButton>, "color"> {
+export interface ButtonProps extends Omit<
+  ComponentProps<typeof FlowbiteButton>,
+  "color"
+> {
   variant?: ButtonVariant;
   size?: ButtonSize;
 }
