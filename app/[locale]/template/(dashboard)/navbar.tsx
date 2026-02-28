@@ -37,7 +37,7 @@ import {
 } from "react-icons/hi";
 
 export function DashboardNavbar() {
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   const sidebar = useSidebarContext();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
@@ -84,19 +84,19 @@ export function DashboardNavbar() {
                 height={32}
               />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                Flowbite
+                {t.navbar.appName}
               </span>
             </NavbarBrand>
             <form className="hidden lg:block lg:pl-2">
               <Label htmlFor="search" className="sr-only">
-                Search
+                {t.navbar.searchSr}
               </Label>
               <TextInput
                 className="w-full lg:w-96"
                 icon={HiSearch}
                 id="search"
                 name="search"
-                placeholder="Search"
+                placeholder={t.navbar.search}
                 required
                 type="search"
               />
@@ -105,18 +105,18 @@ export function DashboardNavbar() {
           <div className="flex items-center lg:gap-3">
             <div className="flex items-center">
               <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700">
-                <span className="sr-only">Search</span>
+                <span className="sr-only">{t.navbar.search}</span>
                 <HiSearch className="h-6 w-6" />
               </button>
               <NotificationBellDropdown />
               <AppDrawerDropdown />
               <div className="hidden dark:block">
-                <Tooltip content="Toggle light mode">
+                <Tooltip content={t.navbar.toggleLightMode}>
                   <DarkThemeToggle />
                 </Tooltip>
               </div>
               <div className="dark:hidden">
-                <Tooltip content="Toggle dark mode">
+                <Tooltip content={t.navbar.toggleDarkMode}>
                   <DarkThemeToggle />
                 </Tooltip>
               </div>
@@ -132,6 +132,7 @@ export function DashboardNavbar() {
 }
 
 function NotificationBellDropdown() {
+  const { t } = useLocale();
   return (
     <Dropdown
       className="rounded"
@@ -139,7 +140,7 @@ function NotificationBellDropdown() {
       inline
       label={
         <span className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-          <span className="sr-only">Notifications</span>
+          <span className="sr-only">{t.navbar.notifications}</span>
           <HiBell className="h-6 w-6" />
         </span>
       }
@@ -147,7 +148,7 @@ function NotificationBellDropdown() {
     >
       <div className="max-w-sm">
         <div className="block rounded-t-xl bg-gray-50 px-4 py-2 text-center text-base font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-          Notifications
+          {t.navbar.notifications}
         </div>
         <div>
           <Link
@@ -355,7 +356,7 @@ function NotificationBellDropdown() {
         >
           <div className="inline-flex items-center gap-x-2">
             <HiEye className="h-5 w-5" />
-            <span>View all</span>
+            <span>{t.navbar.viewAll}</span>
           </div>
         </Link>
       </div>
@@ -364,6 +365,7 @@ function NotificationBellDropdown() {
 }
 
 function AppDrawerDropdown() {
+  const { t } = useLocale();
   return (
     <Dropdown
       className="rounded"
@@ -371,14 +373,14 @@ function AppDrawerDropdown() {
       inline
       label={
         <span className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-          <span className="sr-only">Apps</span>
+          <span className="sr-only">{t.navbar.apps}</span>
           <HiViewGrid className="h-6 w-6" />
         </span>
       }
       theme={{ content: "py-0" }}
     >
       <div className="block border-b bg-gray-50 px-4 py-2 text-center text-base font-medium text-gray-700 dark:border-b-gray-600 dark:bg-gray-700 dark:text-gray-400">
-        Apps
+        {t.navbar.apps}
       </div>
       <div className="grid grid-cols-3 gap-4 p-4">
         <Link
@@ -387,7 +389,7 @@ function AppDrawerDropdown() {
         >
           <HiShoppingBag className="mx-auto mb-1 h-7 w-7 text-gray-500 dark:text-gray-400" />
           <div className="text-sm font-medium text-gray-900 dark:text-white">
-            Sales
+            {t.navbar.sales}
           </div>
         </Link>
         <Link
@@ -396,7 +398,7 @@ function AppDrawerDropdown() {
         >
           <HiUsers className="mx-auto mb-1 h-7 w-7 text-gray-500 dark:text-gray-400" />
           <div className="text-sm font-medium text-gray-900 dark:text-white">
-            Users
+            {t.navbar.users}
           </div>
         </Link>
         <Link
@@ -405,7 +407,7 @@ function AppDrawerDropdown() {
         >
           <HiInbox className="mx-auto mb-1 h-7 w-7 text-gray-500 dark:text-gray-400" />
           <div className="text-sm font-medium text-gray-900 dark:text-white">
-            Inbox
+            {t.navbar.inbox}
           </div>
         </Link>
         <Link
@@ -414,7 +416,7 @@ function AppDrawerDropdown() {
         >
           <HiUserCircle className="mx-auto mb-1 h-7 w-7 text-gray-500 dark:text-gray-400" />
           <div className="text-sm font-medium text-gray-900 dark:text-white">
-            Profile
+            {t.navbar.profile}
           </div>
         </Link>
         <Link
@@ -423,7 +425,7 @@ function AppDrawerDropdown() {
         >
           <HiCog className="mx-auto mb-1 h-7 w-7 text-gray-500 dark:text-gray-400" />
           <div className="text-sm font-medium text-gray-900 dark:text-white">
-            Settings
+            {t.navbar.settings}
           </div>
         </Link>
         <Link
@@ -432,7 +434,7 @@ function AppDrawerDropdown() {
         >
           <HiArchive className="mx-auto mb-1 h-7 w-7 text-gray-500 dark:text-gray-400" />
           <div className="text-sm font-medium text-gray-900 dark:text-white">
-            Products
+            {t.navbar.products}
           </div>
         </Link>
         <Link
@@ -441,7 +443,7 @@ function AppDrawerDropdown() {
         >
           <HiCurrencyDollar className="mx-auto mb-1 h-7 w-7 text-gray-500 dark:text-gray-400" />
           <div className="text-sm font-medium text-gray-900 dark:text-white">
-            Pricing
+            {t.navbar.pricing}
           </div>
         </Link>
         <Link
@@ -450,7 +452,7 @@ function AppDrawerDropdown() {
         >
           <HiOutlineTicket className="mx-auto mb-1 h-7 w-7 text-gray-500 dark:text-gray-400" />
           <div className="text-sm font-medium text-gray-900 dark:text-white">
-            Billing
+            {t.navbar.billing}
           </div>
         </Link>
         <Link
@@ -459,7 +461,7 @@ function AppDrawerDropdown() {
         >
           <HiLogout className="mx-auto mb-1 h-7 w-7 text-gray-500 dark:text-gray-400" />
           <div className="text-sm font-medium text-gray-900 dark:text-white">
-            Logout
+            {t.navbar.logout}
           </div>
         </Link>
       </div>
@@ -468,6 +470,7 @@ function AppDrawerDropdown() {
 }
 
 function UserDropdown() {
+  const { t } = useLocale();
   return (
     <Dropdown
       className="rounded"
@@ -475,7 +478,7 @@ function UserDropdown() {
       inline
       label={
         <span>
-          <span className="sr-only">User menu</span>
+          <span className="sr-only">{t.navbar.userMenu}</span>
           <Avatar alt="" img="/images/users/neil-sims.png" rounded size="sm" />
         </span>
       }
@@ -486,11 +489,11 @@ function UserDropdown() {
           neil.sims@flowbite.com
         </span>
       </DropdownHeader>
-      <DropdownItem>Dashboard</DropdownItem>
-      <DropdownItem>Settings</DropdownItem>
-      <DropdownItem>Earnings</DropdownItem>
+      <DropdownItem>{t.navbar.dashboard}</DropdownItem>
+      <DropdownItem>{t.navbar.settings}</DropdownItem>
+      <DropdownItem>{t.navbar.earnings}</DropdownItem>
       <DropdownDivider />
-      <DropdownItem>Sign out</DropdownItem>
+      <DropdownItem>{t.navbar.signOut}</DropdownItem>
     </Dropdown>
   );
 }

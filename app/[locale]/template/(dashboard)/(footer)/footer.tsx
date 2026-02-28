@@ -1,10 +1,13 @@
 "use client";
 
+import { useLocale } from "@/contexts/locale-context";
 import { Footer, FooterLink, FooterLinkGroup } from "flowbite-react";
 import { FaDribbble, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 import { MdFacebook } from "react-icons/md";
 
 function DashboardFooter() {
+  const { t } = useLocale();
+  const d = t.dashboardFooter;
   return (
     <div className="mx-4 my-6">
       <Footer className="p-4 md:p-6 xl:p-8" container>
@@ -14,28 +17,28 @@ function DashboardFooter() {
               href="#"
               className="mr-3 mb-3 text-gray-500 lg:mb-0 dark:text-gray-400"
             >
-              Terms and conditions
+              {d.terms}
             </FooterLink>
             <FooterLink
               href="#"
               className="mr-3 mb-3 text-gray-500 lg:mb-0 dark:text-gray-400"
             >
-              Privacy Policy
+              {d.privacyPolicy}
             </FooterLink>
             <FooterLink
               href="#"
               className="mr-3 text-gray-500 dark:text-gray-400"
             >
-              Licensing
+              {d.licensing}
             </FooterLink>
             <FooterLink
               href="#"
               className="mr-3 text-gray-500 dark:text-gray-400"
             >
-              Cookie Policy
+              {d.cookiePolicy}
             </FooterLink>
             <FooterLink href="#" className="text-gray-500 dark:text-gray-400">
-              Contact
+              {d.contact}
             </FooterLink>
           </FooterLinkGroup>
           <FooterLinkGroup className="flex-nowrap gap-6 sm:justify-center">
@@ -82,7 +85,7 @@ function DashboardFooter() {
         >
           Flowbite.com
         </a>
-        . All rights reserved.
+        . {d.copyright}
       </p>
     </div>
   );

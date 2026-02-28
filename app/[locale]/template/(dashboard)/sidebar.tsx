@@ -3,6 +3,7 @@
 import { useLocale } from "@/contexts/locale-context";
 import { useSidebarContext } from "@/contexts/sidebar-context";
 import type { Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 import {
   Dropdown,
   Sidebar,
@@ -60,63 +61,64 @@ export function DashboardSidebar() {
   );
 }
 
-function getPages(locale: Locale): SidebarItem[] {
+function getPages(locale: Locale, t: Dictionary): SidebarItem[] {
   const p = (path: string) => `/${locale}${path}`;
+  const s = t.sidebar;
   return [
-    { href: p("/template"), icon: HiChartPie, label: "Dashboard" },
+    { href: p("/template"), icon: HiChartPie, label: s.dashboard },
     {
       href: p("/template/design-system"),
       icon: HiCollection,
-      label: "Design System",
+      label: s.designSystem,
     },
-    { href: p("/template/kanban"), icon: HiViewGrid, label: "Kanban" },
+    { href: p("/template/kanban"), icon: HiViewGrid, label: s.kanban },
     {
       href: p("/template/mailing/inbox"),
       icon: HiInboxIn,
-      label: "Inbox",
+      label: s.inbox,
       badge: "3",
     },
     {
       icon: HiShoppingBag,
-      label: "E-commerce",
+      label: s.ecommerce,
       items: [
-        { href: p("/template/e-commerce/products"), label: "Products" },
-        { href: p("/template/e-commerce/billing"), label: "Billing" },
-        { href: p("/template/e-commerce/invoice"), label: "Invoice" },
+        { href: p("/template/e-commerce/products"), label: s.products },
+        { href: p("/template/e-commerce/billing"), label: s.billing },
+        { href: p("/template/e-commerce/invoice"), label: s.invoice },
       ],
     },
     {
       icon: HiUsers,
-      label: "Users",
+      label: s.users,
       items: [
-        { href: p("/template/users/list"), label: "Users list" },
-        { href: p("/template/users/profile"), label: "Profile" },
-        { href: p("/template/users/feed"), label: "Feed" },
-        { href: p("/template/users/settings"), label: "Settings" },
+        { href: p("/template/users/list"), label: s.usersList },
+        { href: p("/template/users/profile"), label: s.profile },
+        { href: p("/template/users/feed"), label: s.feed },
+        { href: p("/template/users/settings"), label: s.settings },
       ],
     },
     {
       icon: HiDocumentReport,
-      label: "Pages",
+      label: s.pages,
       items: [
-        { href: p("/pages/pricing"), label: "Pricing" },
-        { href: p("/pages/maintenance"), label: "Maintenace" },
-        { href: p("/pages/404"), label: "404 not found" },
-        { href: p("/pages/500"), label: "500 server error" },
+        { href: p("/pages/pricing"), label: s.pricing },
+        { href: p("/pages/maintenance"), label: s.maintenance },
+        { href: p("/pages/404"), label: s.notFound404 },
+        { href: p("/pages/500"), label: s.serverError500 },
       ],
     },
     {
       icon: HiLockClosed,
-      label: "Authentication",
+      label: s.authentication,
       items: [
-        { href: p("/authentication/sign-in"), label: "Sign in" },
-        { href: p("/authentication/sign-up"), label: "Sign up" },
+        { href: p("/authentication/sign-in"), label: s.signIn },
+        { href: p("/authentication/sign-up"), label: s.signUp },
         {
           href: p("/authentication/forgot-password"),
-          label: "Forgot password",
+          label: s.forgotPassword,
         },
-        { href: p("/authentication/reset-password"), label: "Reset password" },
-        { href: p("/authentication/profile-lock"), label: "Profile lock" },
+        { href: p("/authentication/reset-password"), label: s.resetPassword },
+        { href: p("/authentication/profile-lock"), label: s.profileLock },
       ],
     },
   ];
@@ -125,9 +127,10 @@ function getPages(locale: Locale): SidebarItem[] {
 function DesktopSidebar() {
   const pathname = usePathname();
   const params = useParams();
+  const { t } = useLocale();
   const locale = (params?.locale as Locale) ?? "ja";
   const { isCollapsed, setCollapsed } = useSidebarContext().desktop;
-  const pagesWithLocale = getPages(locale);
+  const pagesWithLocale = getPages(locale, t);
   const [isPreview, setIsPreview] = useState(isCollapsed);
 
   useEffect(() => {
@@ -169,7 +172,7 @@ function DesktopSidebar() {
               ))}
             </SidebarItemGroup>
             <SidebarItemGroup className="mt-2 pt-2">
-              {externalPages.map((item) => (
+              {getExternalPages(t).map((item) => (
                 <SidebarItem key={item.label} {...item} pathname={pathname} />
               ))}
             </SidebarItemGroup>
@@ -184,9 +187,10 @@ function DesktopSidebar() {
 function MobileSidebar() {
   const pathname = usePathname();
   const params = useParams();
+  const { t } = useLocale();
   const locale = (params?.locale as Locale) ?? "ja";
   const { isOpen, close } = useSidebarContext().mobile;
-  const pagesWithLocale = getPages(locale);
+  const pagesWithLocale = getPages(locale, t);
 
   if (!isOpen) return null;
 
@@ -206,7 +210,7 @@ function MobileSidebar() {
               <TextInput
                 icon={HiSearch}
                 type="search"
-                placeholder="Search"
+                placeholder={t.navbar.search}
                 required
                 size={32}
               />
@@ -218,7 +222,7 @@ function MobileSidebar() {
                 ))}
               </SidebarItemGroup>
               <SidebarItemGroup className="mt-2 pt-2">
-                {externalPages.map((item) => (
+                {getExternalPages(t).map((item) => (
                   <SidebarItem key={item.label} {...item} pathname={pathname} />
                 ))}
               </SidebarItemGroup>
@@ -298,6 +302,7 @@ function BottomMenu({
   isCollapsed: boolean;
   locale: Locale;
 }) {
+  const { t } = useLocale();
   return (
     <div
       className={twMerge(
@@ -309,12 +314,12 @@ function BottomMenu({
         <span className="sr-only">Tweaks</span>
         <HiAdjustments className="h-6 w-6" />
       </button>
-      <Tooltip content="Settings page">
+      <Tooltip content={t.sidebar.settingsPage}>
         <Link
           href={`/${locale}/template/users/settings`}
           className="inline-flex cursor-pointer justify-center rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white"
         >
-          <span className="sr-only">Settings page</span>
+          <span className="sr-only">{t.sidebar.settingsPage}</span>
           <HiCog className="h-6 w-6" />
         </Link>
       </Tooltip>
@@ -364,7 +369,7 @@ function FlagEn({ className }: { className?: string }) {
 }
 
 function LanguageDropdown() {
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   const pathname = usePathname();
 
   const pathForLocale = (targetLocale: Locale) =>
@@ -377,7 +382,7 @@ function LanguageDropdown() {
       inline
       label={
         <span className="inline-flex cursor-pointer items-center justify-center gap-1.5 rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white">
-          <span className="sr-only">Current language</span>
+          <span className="sr-only">{t.sidebar.currentLanguage}</span>
           {locale === "ja" ? (
             <FlagJa className="h-5 w-5 shrink-0 rounded-sm" />
           ) : (
@@ -414,23 +419,26 @@ function LanguageDropdown() {
   );
 }
 
-const externalPages: SidebarItem[] = [
-  {
-    href: "https://github.com/themesberg/flowbite-react/",
-    target: "_blank",
-    icon: HiClipboardList,
-    label: "Docs",
-  },
-  {
-    href: "https://flowbite-react.com/",
-    target: "_blank",
-    icon: HiCollection,
-    label: "Components",
-  },
-  {
-    href: "https://github.com/themesberg/flowbite-react/issues",
-    target: "_blank",
-    icon: HiSupport,
-    label: "Help",
-  },
-];
+function getExternalPages(t: Dictionary): SidebarItem[] {
+  const s = t.sidebar;
+  return [
+    {
+      href: "https://github.com/themesberg/flowbite-react/",
+      target: "_blank",
+      icon: HiClipboardList,
+      label: s.docs,
+    },
+    {
+      href: "https://flowbite-react.com/",
+      target: "_blank",
+      icon: HiCollection,
+      label: s.components,
+    },
+    {
+      href: "https://github.com/themesberg/flowbite-react/issues",
+      target: "_blank",
+      icon: HiSupport,
+      label: s.help,
+    },
+  ];
+}
